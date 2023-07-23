@@ -6,11 +6,11 @@ namespace Rivet {
 
 
   /// @brief Add a short analysis description here
-  class PILEUP : public Analysis {
+  class Pileup : public Analysis {
   public:
 
     /// Constructor
-    RIVET_DEFAULT_ANALYSIS_CTOR(PILEUP);
+    RIVET_DEFAULT_ANALYSIS_CTOR(Pileup);
 
 
     /// @name Analysis methods
@@ -28,23 +28,25 @@ namespace Rivet {
       declare(vfs, "VisibleFinalState");
 
       csv = ofstream();
-      csv.open("pileup.csv");
+      csv.open("Pileup.csv");
 
       evtnumber = 0;
 
-        csv
-          << "eventnumber"
-          << " , "
-          << "pdgid"
-          << " , "
-          << "charge"
-          << " , "
-          << "px"
-          << " , "
-          << "py"
-          << " , "
-          << "pz"
-          << endl;
+      csv
+        << "eventnumber"
+        << " , "
+        << "pdgid"
+        << " , "
+        << "charge"
+        << " , "
+        << "px"
+        << " , "
+        << "py"
+        << " , "
+        << "pz"
+        << endl;
+
+      return;
     }
 
 
@@ -52,7 +54,7 @@ namespace Rivet {
     void analyze(const Event& event) {
 
       // Retrieve dressed leptons, sorted by pT
-      Particles particles =
+      const Particles& particles =
         apply<VisibleFinalState>(event, "VisibleFinalState").particles();
 
       for (const Particle &part : particles) {
@@ -88,6 +90,6 @@ namespace Rivet {
   };
 
 
-  RIVET_DECLARE_PLUGIN(PILEUP);
+  RIVET_DECLARE_PLUGIN(Pileup);
 
 }
