@@ -30,9 +30,9 @@ namespace Rivet {
       // The basic final-state projection:
       // all final-state particles within
       // the given eta acceptance
-      const FinalState fs(Cuts::abseta < 2.5);
+      const VisibleFinalState vfs(Cuts::abseta < 2.5 && Cuts::pT > 1*GeV);
 
-      PromptFinalState prompt(fs);
+      PromptFinalState prompt(vfs);
       prompt.acceptTauDecays(true);
 
       IdentifiedFinalState photons(prompt);
@@ -53,11 +53,17 @@ namespace Rivet {
       declare(dressedmuons, "dressedmuons");
 
 
-      VetoedFinalState vfs(fs);
-      vfs.addVetoOnThisFinalState(dressedelectrons);
-      vfs.addVetoOnThisFinalState(dressedmuons);
+      VetoedFinalState jetfs(vfs);
+      jetfs.addVetoOnThisFinalState(dressedelectrons);
+      jetfs.addVetoOnThisFinalState(dressedmuons);
 
-      FastJets jets(vfs, FastJets::ANTIKT, 1.0, JetAlg::Muons::ALL, JetAlg::Invisibles::ALL);
+      FastJets jets
+        ( jetfs
+        , FastJets::ANTIKT
+        , 1.0
+        , JetAlg::Muons::ALL, JetAlg::Invisibles::ALL
+        );
+
       declare(jets, "jets");
 
 
