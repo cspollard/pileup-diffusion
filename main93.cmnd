@@ -11,7 +11,7 @@ Beams:eCM = 7000.       ! CM energy of collision
 SoftQCD:all = on        ! All soft QCD processes are on,
 
 ! 2) Settings related to the run
-Main:numberOfEvents = 100000       ! number of events to generate
+Main:numberOfEvents = 1000000      ! number of events to generate
 Init:showChangedSettings = on      ! list changed settings
 Init:showAllSettings = off         ! list all settings
 Init:showChangedParticleData = on  ! list changed particle data
