@@ -68,8 +68,10 @@ namespace Rivet {
 
 
       csv = ofstream();
-      csv.open("ttbar.csv");
-
+      const string& csvname = getOption("csvname");
+      cout << "writing to csv file " << csvname << endl;
+      csv.open(csvname);
+      
       jetnumber = 0;
 
       csv
